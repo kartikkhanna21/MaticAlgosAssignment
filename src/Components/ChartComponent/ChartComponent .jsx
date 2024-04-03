@@ -1,6 +1,6 @@
 import { createChart, ColorType } from 'lightweight-charts';
 import React, { useEffect, useRef, useState } from 'react';
-import { Container } from 'react-bootstrap';
+import styles from './ChartComponent.module.css';
 
 
 export const ChartComponent = props => {
@@ -29,29 +29,7 @@ export const ChartComponent = props => {
             const lineSeries = chart.addLineSeries();
             lineSeries.setData(data.map(item => ({ time: item.date, value: item.cumsum })));
 
-            const container = document.getElementById('container');
-            const background = document.createElement('div');
-            // place below the chart
-            background.style.zIndex = -1;
-            background.style.position = 'absolute';
-            // set size and position to match container
-            background.style.inset = '0px';
-            background.style.backgroundImage = `url("https://maticalgos.com/wp-content/uploads/2022/01/logo_white-172x46.png")`;
-            background.style.backgroundRepeat = 'no-repeat';
-            background.style.backgroundPosition = 'left top ';
-            background.style.opacity = '1';
-            container.appendChild(background);
-
-            chart.applyOptions({
-                watermark: {
-                    visible: true,
-                    fontSize: 35,
-                    horzAlign: 'right',
-                    vertAlign: 'bottom',
-                    color: 'gray',
-                    text: 'MaticAlgos',
-                },
-            })
+ 
             // Change the color of the line
             lineSeries.applyOptions({
                 color: 'red',
@@ -63,11 +41,12 @@ export const ChartComponent = props => {
 
 
     return (
-        <Container className=''>
-            <div id="chart-container">
-                <div id='container'></div>
+        
+            <div id="chart-container" className={styles.chart_container}>
+                    <div className={styles.brandlogo}>
+                        <img src="https://maticalgos.com/wp-content/uploads/2022/01/logo_white-172x46.png" alt="" />
+                    </div>
             </div>
-        </Container>
 
 
 
